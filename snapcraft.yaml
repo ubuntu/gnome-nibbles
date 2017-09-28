@@ -1,0 +1,87 @@
+name: gnome-nibbles
+version: 3.24.0
+summary: Guide a worm around a maze
+description: |
+  Control a worm in its quest to eat bonuses and become longer. Outmaneuver
+  enemy worms while eating doughnuts and ice cream to increase your length.
+  Each worm has ten lives and loses one by running into a wall, another worm,
+  or itself. The enemy worms are after the same bonuses that you are, so be
+  careful: if they become too large, you won’t have much room for movement.
+
+  The adventure progresses through 26 maps of increasing difficulty. The early
+  levels are mostly open with a few walls, but later on, cramped spaces and
+  teleporters make things more interesting.
+
+  Play on your own against up to five enemy worms, or share your keyboard to
+  play with a friend.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+plugs:
+    gnome-3-26-1604:
+      interface: content
+      target: $SNAP/gnome-platform
+      default-provider: gnome-3-26-1604:gnome-3-26-1604
+
+slots:
+  # for GtkApplication registration
+  gnome-nibbles:
+    interface: dbus
+    bus: session
+    name: org.gnome.nibbles
+
+apps:
+  gnome-nibbles:
+    command: desktop-launch gnome-nibbles
+    plugs:
+      - desktop
+      - desktop-legacy
+      - gsettings
+      - network
+      - opengl
+      - unity7
+      - wayland
+    desktop: usr/share/applications/org.gnome.Nibbles.desktop
+
+parts:
+  gnome-nibbles:
+    build-attributes: [no-system-libraries]
+    after: [desktop-gnome-platform]
+    source: https://git.gnome.org/browse/gnome-nibbles
+    source-type: git
+    source-tag: 3.24.0
+    plugin: autotools
+    prepare:
+      sed -i.bak -e 's|=gnome-nibbles$|=${SNAP}/meta/gui/gnome-nibbles.png|g' data/org.gnome.Nibbles.desktop.in
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp ../src/data/icons/hicolor/48x48/gnome-nibbles.png $SNAPCRAFT_PART_INSTALL/meta/gui/
+      cp data/org.gnome.Nibbles.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/
+    # workaround the issue described in https://launchpad.net/bugs/1583250
+    configflags: [--disable-maintainer-mode, --prefix=/snap/gnome-nibbles/current/usr]
+    organize:
+      snap/gnome-nibbles/current/usr: usr
+    build-packages:
+      - gnome-common
+      - gnome-pkg-tools
+      - intltool
+      - appstream-util
+      - libcanberra-gtk3-dev
+      - libclutter-1.0-dev
+      - libclutter-gtk-1.0-dev
+      - libglib2.0-dev
+      - libgtk-3-dev
+      - librsvg2-dev
+      - yelp-tools
+      - libgnome-games-support-1-dev
+      - libgee-0.8-dev
+  libraries:
+    plugin: nil
+    stage-packages:
+      - libgnome-games-support-1-2
+      - libgee-0.8-2
+    prime:
+      - "usr/lib/*/libgnome-games-support-1.so.*"
+      - "usr/lib/x86_64-linux-gnu/libgee-0.8.so.*"
+
