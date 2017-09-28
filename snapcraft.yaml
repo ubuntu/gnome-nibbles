@@ -76,6 +76,7 @@ parts:
       - yelp-tools
       - libgnome-games-support-1-dev
       - libgee-0.8-dev
+      - valac
   libraries:
     plugin: nil
     stage-packages:
