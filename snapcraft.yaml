@@ -40,6 +40,7 @@ apps:
       - gsettings
       - network
       - opengl
+      - pulseaudio
       - unity7
       - wayland
     desktop: usr/share/applications/org.gnome.Nibbles.desktop
@@ -84,5 +85,4 @@ parts:
       - libgee-0.8-2
     prime:
       - "usr/lib/*/libgnome-games-support-1.so.*"
-      - "usr/lib/x86_64-linux-gnu/libgee-0.8.so.*"
-
+      - "usr/lib/*/libgee-0.8.so.*"
