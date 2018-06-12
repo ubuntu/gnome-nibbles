@@ -61,7 +61,7 @@ parts:
   gnome-nibbles:
     build-attributes: [no-system-libraries]
     after: [desktop-gnome-platform]
-    source: https://git.gnome.org/browse/gnome-nibbles
+    source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
     source-tag: 3.24.0
     plugin: autotools
