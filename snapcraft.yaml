@@ -46,7 +46,7 @@ slots:
 
 apps:
   gnome-nibbles:
-    command: desktop-launch gnome-nibbles
+    command: desktop-launch snapcraft-preload gnome-nibbles
     plugs:
       - desktop
       - desktop-legacy
@@ -58,6 +58,14 @@ apps:
     desktop: usr/share/applications/org.gnome.Nibbles.desktop
 
 parts:
+# Needed by clutter
+  snapcraft-preload:
+    source: https://github.com/sergiusens/snapcraft-preload.git
+    plugin: cmake
+    build-packages:
+      - gcc-multilib
+      - g++-multilib
+
   libcanberra:
     source: git://git.0pointer.de/libcanberra
     source-type: git
@@ -126,6 +134,7 @@ parts:
   libraries:
     plugin: nil
     stage-packages:
+      - libclutter-gtk-1.0-0
       - libgnome-games-support-1-3
       - libgee-0.8-2
     prime:
