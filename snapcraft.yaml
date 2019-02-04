@@ -17,12 +17,13 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
+base: core18
 
 plugs:
-  gnome-3-26-1604:
+  gnome-3-28-1804:
     interface: content
     target: $SNAP/gnome-platform
-    default-provider: gnome-3-26-1604
+    default-provider: gnome-3-28-1804
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes
@@ -50,7 +51,6 @@ apps:
       - desktop
       - desktop-legacy
       - gsettings
-      - network
       - opengl
       - pulseaudio
       - unity7
@@ -58,9 +58,43 @@ apps:
     desktop: usr/share/applications/org.gnome.Nibbles.desktop
 
 parts:
+  libcanberra:
+    source: git://git.0pointer.de/libcanberra
+    source-type: git
+    plugin: autotools
+    configflags:
+      - --prefix=/snap/gnome-nibbles/current/usr
+      - --enable-pulse
+      - --enable-gstreamer
+      - --enable-gtk3
+      - --enable-alsa
+      - --disable-oss
+    organize:
+      snap/gnome-nibblees/current/usr: usr
+    build-packages:
+      - libltdl-dev
+      - libasound2-dev
+      - libvorbis-dev
+      - libgtk-3-dev
+      - libtdb-dev
+      - libpulse-dev
+      - libgstreamer1.0-dev
+      - gtk-doc-tools
+
+  desktop-gnome-platform:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk3"]
+    build-packages:
+      - build-essential
+      - libgtk-3-dev
+    override-build: |
+      snapcraftctl build
+      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
+
   gnome-nibbles:
-    build-attributes: [no-system-libraries]
-    after: [desktop-gnome-platform]
+    after: [desktop-gnome-platform, libcanberra]
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
     source-tag: 3.24.0
@@ -75,8 +109,8 @@ parts:
     organize:
       snap/gnome-nibbles/current/usr: usr
     build-packages:
+      - gettext
       - gnome-common
-      - gnome-pkg-tools
       - intltool
       - appstream-util
       - libcanberra-gtk3-dev
