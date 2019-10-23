@@ -69,7 +69,7 @@ parts:
     after: [libcanberra, gsound]
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
-    source-tag: 3.34.0
+    source-tag: 3.34.1
     plugin: meson
     meson-parameters: [--prefix=/usr]
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
@@ -82,8 +82,6 @@ parts:
       snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
       cp ../src/data/icons/hicolor/scalable/org.gnome.Nibbles.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
-      # Hack to work around summary not properly tagged
-      sed -i.bak -e 's|_summary|summary|g' $SNAPCRAFT_PART_INSTALL/usr/share/metainfo/org.gnome.Nibbles.appdata.xml
     organize:
       snap/gnome-nibbles/current/usr: usr
     build-packages:
