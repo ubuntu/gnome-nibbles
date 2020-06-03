@@ -62,6 +62,7 @@ parts:
       - autoconf-archive
       - gtk-doc-tools
       - intltool
+      - libgirepository1.0-dev
 
   gnome-nibbles:
     after: [gsound]
