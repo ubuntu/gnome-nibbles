@@ -17,7 +17,7 @@ slots:
 
 apps:
   gnome-nibbles:
-    extensions: [gnome-3-28]
+    extensions: [gnome-3-34]
     command: usr/bin/gnome-nibbles
     plugs:
       - gsettings
@@ -44,7 +44,6 @@ parts:
       - libltdl-dev
       - libasound2-dev
       - libvorbis-dev
-      - libgtk-3-dev
       - libtdb-dev
       - libpulse-dev
       - libgstreamer1.0-dev
@@ -60,16 +59,14 @@ parts:
       snap/gnome-nibbles/current/usr: usr
     build-packages:
       - autoconf-archive
+      - gtk-doc-tools
       - intltool
-      - libgirepository1.0-dev
-      - libglib2.0-dev
-      - valac
 
   gnome-nibbles:
-    after: [libcanberra, gsound]
+    after: [gsound]
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
-    source-tag: 3.34.1
+    source-branch: gnome-3-36
     plugin: meson
     meson-parameters: [--prefix=/usr]
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
@@ -86,26 +83,16 @@ parts:
     organize:
       snap/gnome-nibbles/current/usr: usr
     build-packages:
-      - gettext
-      - gnome-common
-      - intltool
-      - appstream-util
-      - libcanberra-gtk3-dev
-      - libclutter-1.0-dev
-      - libclutter-gtk-1.0-dev
-      - libglib2.0-dev
-      - libgtk-3-dev
-      - librsvg2-dev
-      - yelp-tools
       - libgnome-games-support-1-dev
-      - libgee-0.8-dev
-      - valac
+      - libgudev-1.0-dev
+
   libraries:
     plugin: nil
     stage-packages:
-      - libclutter-gtk-1.0-0
       - libgnome-games-support-1-3
       - libgee-0.8-2
+      - libgudev-1.0-0
     prime:
       - "usr/lib/*/libgnome-games-support-1.so.*"
       - "usr/lib/*/libgee-0.8.so.*"
+      - "usr/lib/*/libgudev*.so.*"
