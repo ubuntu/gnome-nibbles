@@ -47,6 +47,7 @@ parts:
       - libtdb-dev
       - libpulse-dev
       - libgstreamer1.0-dev
+      - libudev-dev
       - gtk-doc-tools
 
   gsound:
