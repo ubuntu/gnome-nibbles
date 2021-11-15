@@ -54,8 +54,9 @@ parts:
     after: [libcanberra]
     source: https://gitlab.gnome.org/GNOME/gsound.git
     source-type: git
-    plugin: autotools
-    configflags: [--prefix=/snap/gnome-nibbles/current/usr, --disable-Werror]
+    source-tag: 1.0.3 
+    plugin: meson
+    meson-parameters: [--prefix=/snap/gnome-nibbles/current/usr]
     organize:
       snap/gnome-nibbles/current/usr: usr
     build-packages:
