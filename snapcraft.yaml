@@ -38,6 +38,3 @@ parts:
       snapcraftctl set-version $(git describe --tags --abbrev=10)
     organize:
       snap/gnome-nibbles/current/usr: usr
-
-  libraries:
-    plugin: nil
