@@ -33,7 +33,6 @@ parts:
     source-tag: 3.38.2
     plugin: meson
     meson-parameters: [--prefix=/usr]
-    parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags --abbrev=10)
