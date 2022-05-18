@@ -21,8 +21,6 @@ apps:
     command: usr/bin/gnome-nibbles
     plugs:
       - audio-playback
-      - gsettings
-      - opengl
     desktop: usr/share/applications/org.gnome.Nibbles.desktop
     common-id: org.gnome.Nibbles.desktop
 
