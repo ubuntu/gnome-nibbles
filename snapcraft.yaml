@@ -39,7 +39,6 @@ parts:
       snapcraftctl set-version $(git describe --tags --abbrev=10)
     override-build: |
       sed -i.bak -e 's|=org.gnome.Nibbles$|=${SNAP}/meta/gui/org.gnome.Nibbles.svg|g' $SNAPCRAFT_PART_SRC/data/org.gnome.Nibbles.desktop.in
-      sed -i.bak -e 's|media: gnome_nibbles_help_media|media: gnome_nibbles_help_media, symlink_media: false,|g' help/meson.build
       snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
       cp ../src/data/icons/hicolor/scalable/org.gnome.Nibbles.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
