@@ -23,6 +23,8 @@ apps:
       - audio-playback
     desktop: usr/share/applications/org.gnome.Nibbles.desktop
     common-id: org.gnome.Nibbles.desktop
+    environment:
+      DISABLE_WAYLAND: 'true'
 
 parts:
   gnome-nibbles:
