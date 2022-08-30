@@ -37,5 +37,4 @@ parts:
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
     override-pull: |
       craftctl default
-      craftctl set version=$(git describe --tags --abbrev=10)
       patch -p1 < $CRAFT_PROJECT_DIR/patches/patch1.diff
