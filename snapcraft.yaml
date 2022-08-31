@@ -37,4 +37,4 @@ parts:
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
     override-pull: |
       craftctl default
-      patch -p1 < $CRAFT_PROJECT_DIR/patches/patch1.diff
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/01-fix-vala-compilation-update-help-and-translations.diff

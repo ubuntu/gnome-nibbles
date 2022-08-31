@@ -1,3 +1,5 @@
+# This patch is mainly to fix VALA compile errors due to changes
+# in the API. It also updates the help and some languages.
 diff --git a/help/C/basics.page b/help/C/basics.page
 index 538a378..b5ffd65 100644
 --- a/help/C/basics.page
