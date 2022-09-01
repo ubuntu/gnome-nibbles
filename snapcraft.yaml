@@ -2,7 +2,7 @@ name: gnome-nibbles
 adopt-info: gnome-nibbles
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core22
 
 layout:
   /usr/share/gnome-nibbles:
@@ -17,7 +17,7 @@ slots:
 
 apps:
   gnome-nibbles:
-    extensions: [gnome-3-38]
+    extensions: [gnome]
     command: usr/bin/gnome-nibbles
     plugs:
       - audio-playback
@@ -32,10 +32,11 @@ parts:
     source-type: git
     source-tag: 3.38.2
     plugin: meson
-    meson-parameters: [--prefix=/usr]
+    meson-parameters:
+      - --prefix=/usr
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
     override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags --abbrev=10)
-    organize:
-      snap/gnome-nibbles/current/usr: usr
+      craftctl default
+      for i in $CRAFT_PROJECT_DIR/patches/*.diff; do
+        patch -p1 < $i
+      done
