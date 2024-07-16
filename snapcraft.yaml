@@ -40,3 +40,7 @@ parts:
       for i in $CRAFT_PROJECT_DIR/patches/*.diff; do
         patch -p1 < $i
       done
+    build-packages:
+      - libgnome-games-support-1-dev
+    stage-packages:
+      - libgnome-games-support-1-3
