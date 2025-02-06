@@ -30,16 +30,11 @@ parts:
   gnome-nibbles:
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
-    source-tag: 3.38.2
+    source-tag: 4.1.0
     plugin: meson
     meson-parameters:
       - --prefix=/usr
     parse-info: [usr/share/metainfo/org.gnome.Nibbles.appdata.xml]
-    override-pull: |
-      craftctl default
-      for i in $CRAFT_PROJECT_DIR/patches/*.diff; do
-        patch -p1 < $i
-      done
     build-packages:
       - libgnome-games-support-1-dev
     stage-packages:
