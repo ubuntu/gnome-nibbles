@@ -30,7 +30,7 @@ parts:
   gnome-nibbles:
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
-    source-tag: 4.1.0
+    source-tag: 4.2.0
     plugin: meson
     meson-parameters:
       - --prefix=/usr
@@ -42,3 +42,11 @@ parts:
     override-pull: |
       craftctl default
       sed -i 's|Icon=org.gnome.Nibbles|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.gnome.Nibbles.svg|g' data/org.gnome.Nibbles.desktop.in
+    prime:
+      - usr/bin/gnome-nibbles
+      - usr/share/applications/org.gnome.Nibbles.desktop
+      - usr/share/glib-2.0/schemas/org.gnome.Nibbles.gschema.xml
+      - usr/share/gnome-nibbles
+      - usr/share/icons/hicolor
+      - usr/share/metainfo/org.gnome.Nibbles.appdata.xml
+      - usr/lib/*/libgnome-games-support*
