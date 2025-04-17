@@ -30,7 +30,8 @@ parts:
   gnome-nibbles:
     source: https://gitlab.gnome.org/GNOME/gnome-nibbles.git
     source-type: git
-    source-tag: 4.2.0
+    source-tag: '4.2.0'
+    source-depth: 1
     plugin: meson
     meson-parameters:
       - --prefix=/usr
